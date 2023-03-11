@@ -1,0 +1,7 @@
+.ingredients {
+	display: flex;
+	flex-direction: row;
+	row-gap: 16px;
+	column-gap: 8px;
+	flex-wrap: wrap;
+}

@@ -1,0 +1,29 @@
+.image {
+	width: 480px;
+	height: 240px;
+}
+.title {
+	display: flex;
+	width: 640px;
+	height: 64px;
+	align-items: center;
+	justify-content: space-between;
+}
+.close {
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	border: 0;
+	background: none;
+	object-fit: contain;
+	object-position: center;
+}
+.nutrition {
+	color: var(--text-inactive-color);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	column-gap: 20px;
+	row-gap: 8px;
+	text-align: center;
+}
