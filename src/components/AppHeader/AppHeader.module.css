@@ -1,0 +1,38 @@
+.AppHeader {
+	display: flex;
+	align-items: center;
+	max-width: 1920px;
+	width: 100%;
+	margin: 0 auto;
+	background-color: var(--background);
+}
+.logo {
+	display: flex;
+	justify-content: center;
+}
+.AppHeader__container {
+	display: flex;
+	flex: 1;
+	gap: 8px;
+}
+.AppHeader__container_side_left {
+	margin-left: 320px;
+	justify-content: flex-start;
+}
+.AppHeader__container_side_right {
+	margin-right: 320px;
+	justify-content: flex-end;
+}
+.link {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	cursor: pointer;
+	color: var(--text-primary-color);
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+.inactive {
+	color: var(--text-inactive-color);
+}

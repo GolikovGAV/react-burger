@@ -1,0 +1,10 @@
+.popup {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 720px;
+	background-color: var(--background);
+	border-radius: 40px;
+}

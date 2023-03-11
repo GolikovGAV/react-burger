@@ -1,0 +1,22 @@
+.image {
+	width: 120px;
+	height: 120px;
+}
+.close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	border: 0;
+	background: none;
+	object-fit: contain;
+	object-position: center;
+}
+.glow {
+	text-shadow: 0px 0px 16px var(--colors-interface-accent);
+}
+.inactive {
+	color: var(--text-inactive-color);
+}
