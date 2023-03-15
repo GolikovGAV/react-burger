@@ -2,4 +2,4 @@
 
 ## Project: React Burger
 
-# ...
+# Описание прокекта 
