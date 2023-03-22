@@ -1,49 +1,29 @@
+import React from 'react';
+
 import s from './BurgerIngredients.module.css';
-import {
-	Counter,
-	CurrencyIcon
-} from '@ya.praktikum/react-developer-burger-ui-components';
 import cn from 'classnames';
-import { useState } from 'react';
-import ModalOverlay from '../ModalOverlay/ModalOverlay';
-import Modal from '../Modal/Modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
 
-function BurgerIngredients(ingredients) {
-	const [count, setCount] = useState(0);
-	const [state, setState] = useState(false);
+import IngredientsTab from '../IngredientsTab/IngredientsTab';
+import BurgerIngredientType from '../BurgerIngredientType/BurgerIngredientType';
+import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
 
-	const openModal = () => {
-		state === false ? setState(true) : setState(false);
-	};
-
+function BurgerIngredients() {
 	return (
-		<>
-			<div className={cn(s.ingredient, 'ml-4')} onClick={openModal}>
-				{count !== 0 && <Counter count={count} size='default' />}
-				<img
-					className={s.ingredient__image}
-					src={ingredients.image}
-					alt={ingredients.name}
-				/>
-				<div
-					onClick={() => setCount(count + 1)}
-					className={cn(s.ingredient__price, 'mt-1 mb-1')}
-				>
-					<p className='text text_type_digits-default '>{ingredients.price}</p>
-					<CurrencyIcon type='primary' />
-				</div>
-
-				<p className='text text_type_main-default'>{ingredients.name}</p>
+		<section className={s.column}>
+			<p className='text text_type_main-large mt-10 mb-5'>Соберите бургер</p>
+			<IngredientsTab />
+			<div className={cn(s.ingredients, 'custom-scroll')}>
+				<BurgerIngredientType name='Булки'>
+					<BurgerIngredient type='bun' />
+				</BurgerIngredientType>
+				<BurgerIngredientType name='Соусы'>
+					<BurgerIngredient type='sauce' />
+				</BurgerIngredientType>
+				<BurgerIngredientType name='Начинки'>
+					<BurgerIngredient type='main' />
+				</BurgerIngredientType>
 			</div>
-			{state === true && (
-				<ModalOverlay onClick={openModal}>
-					<Modal>
-						<IngredientDetails data={ingredients} onClick={openModal} />
-					</Modal>
-				</ModalOverlay>
-			)}
-		</>
+		</section>
 	);
 }
 

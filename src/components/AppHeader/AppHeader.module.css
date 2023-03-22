@@ -1,8 +1,7 @@
 .AppHeader {
 	display: flex;
 	align-items: center;
-	max-width: 1920px;
-	width: 100%;
+	width: 1920px;
 	margin: 0 auto;
 	background-color: var(--background);
 }

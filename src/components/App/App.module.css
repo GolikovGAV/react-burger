@@ -5,26 +5,3 @@
 	grid-template-columns: 1fr 1fr;
 	gap: 40px;
 }
-.ingredients {
-	max-height: 756px;
-	overflow-y: scroll;
-}
-.column {
-	height: 912px;
-}
-.price {
-	display: flex;
-	flex-direction: row-reverse;
-	align-items: center;
-}
-
-.filling {
-	display: grid;
-	grid-template-rows: repeat(auto, 1fr);
-	grid-template-columns: 24px 1fr;
-	column-gap: 8px;
-	align-items: center;
-	overflow-y: scroll;
-	max-height: 464px;
-	row-gap: 16px;
-}
