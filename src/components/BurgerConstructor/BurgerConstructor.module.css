@@ -1,0 +1,7 @@
+.filling {
+	display: grid;
+	row-gap: 16px;
+
+	overflow-y: scroll;
+	max-height: 464px;
+}

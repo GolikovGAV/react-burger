@@ -8,12 +8,14 @@ function checkResponse(res) {
 		: res.json().then((res) => Promise.reject(`Ошибка: ${res.message}`));
 }
 
+function request(url) {
+	return fetch(url).then(checkResponse);
+}
+
 function getInfoFromServer() {
-	return fetch(config.url)
-		.then(checkResponse)
-		.then((data) => {
-			return data.data;
-		});
+	return request(config.url).then((data) => {
+		return data.data;
+	});
 }
 
 export default getInfoFromServer;

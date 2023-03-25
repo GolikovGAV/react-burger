@@ -8,10 +8,12 @@ import Modal from '../Modal/Modal';
 import cn from 'classnames';
 
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import getInfoFromServer from '../Api/Api';
+import { useDispatch, useSelector } from 'react-redux';
+import { addConstructorElement } from '../services/selectors/burgerConstructorSlice';
+import uuid4 from 'uuid4';
 
-function BurgerIngredient(type) {
-	const [count, setCount] = useState(0);
+function BurgerIngredient(ingredient) {
+	// const [count, setCount] = useState(0);
 
 	const [state, setState] = useState(false);
 
@@ -19,48 +21,41 @@ function BurgerIngredient(type) {
 		state === false ? setState(true) : setState(false);
 	};
 
-	const [ingredients, setIngredients] = React.useState([]);
+	const dispatch = useDispatch();
 
-	React.useEffect(() => {
-		getInfoFromServer().then((data) => {
-			setIngredients(data);
-		});
-	}, []);
+	const id = uuid4();
 
-	return ingredients
-		.filter((ingredient) => ingredient.type === type.type)
-		.map((ingredients) => {
-			return (
-				<div
-					className={cn(s.ingredient, 'ml-4')}
-					onClick={openModal}
-					key={ingredients._id}
-				>
-					{count !== 0 && <Counter count={count} size='default' />}
-					<img
-						className={s.ingredient__image}
-						src={ingredients.image}
-						alt={ingredients.name}
-					/>
-					<div
-						onClick={() => setCount(count + 1)}
-						className={cn(s.ingredient__price, 'mt-1 mb-1')}
-					>
-						<p className='text text_type_digits-default '>
-							{ingredients.price}
-						</p>
-						<CurrencyIcon type='primary' />
-					</div>
-
-					<p className='text text_type_main-default'>{ingredients.name}</p>
-					{state === true && (
-						<Modal onClick={openModal}>
-							<IngredientDetails data={ingredients} onClick={openModal} />
-						</Modal>
-					)}
+	return (
+		<>
+			{state === true && (
+				<Modal onClick={openModal}>
+					<IngredientDetails data={ingredient} onClick={openModal} />
+				</Modal>
+			)}
+			<div
+				className={cn(s.ingredient, 'ml-4')}
+				onClick={(e) => {
+					openModal();
+					dispatch(addConstructorElement(ingredient));
+				}}
+				key={id}
+				id={id}
+				draggable
+			>
+				<img
+					draggable='false'
+					className={s.ingredient__image}
+					src={ingredient.image}
+					alt={ingredient.name}
+				/>
+				<div className={cn(s.ingredient__price, 'mt-1 mb-1')}>
+					<p className='text text_type_digits-default '>{ingredient.price}</p>
+					<CurrencyIcon type='primary' />
 				</div>
-			);
-		});
+				<p className='text text_type_main-default'>{ingredient.name}</p>
+			</div>
+		</>
+	);
 }
 
 export default BurgerIngredient;

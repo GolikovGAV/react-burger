@@ -7,15 +7,21 @@ import {
 	ConstructorElement,
 	DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
+import { useDispatch } from 'react-redux';
+import { removeConstructorElement } from '../services/selectors/burgerConstructorSlice';
 
-function ChosenElement(props) {
+function ChosenElement(ingredient) {
+	const dispatch = useDispatch();
 	return (
-		<div className={cn(s.filling, 'custom-scroll')}>
+		<div className={s.element}>
 			<DragIcon />
 			<ConstructorElement
-				text={props.name}
-				price={props.price}
-				thumbnail={props.image}
+				text={ingredient.name}
+				price={ingredient.price}
+				thumbnail={ingredient.image}
+				handleClose={() => {
+					dispatch(removeConstructorElement(ingredient));
+				}}
 			/>
 		</div>
 	);
