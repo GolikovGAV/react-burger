@@ -1,18 +1,18 @@
-import s from './BurgerIngredient.module.css';
 import React, { useState } from 'react';
+import cn from 'classnames';
+import uuid4 from 'uuid4';
+import { useDrag } from 'react-dnd/dist/hooks';
+import { useSelector } from 'react-redux';
+
+import s from './BurgerIngredient.module.css';
 import {
 	Counter,
 	CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
-import cn from 'classnames';
 
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import uuid4 from 'uuid4';
-import { useDrag } from 'react-dnd/dist/hooks';
-import { useSelector } from 'react-redux';
 import { selectCountState } from '../services/selectors/burgerConstructorSlice';
-
 function BurgerIngredient(ingredient) {
 	const [state, setState] = useState(false);
 

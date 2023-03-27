@@ -1,44 +1,55 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import cn from 'classnames';
+import { useSelector } from 'react-redux';
 
 import s from './BurgerIngredients.module.css';
 import IngredientsTab from '../IngredientsTab/IngredientsTab';
 import BurgerIngredientType from '../BurgerIngredientType/BurgerIngredientType';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
-import { useSelector } from 'react-redux';
+import { useInView } from 'react-intersection-observer';
 
 function BurgerIngredients() {
 	const ingredients = useSelector((state) => state.burgerIngredient.data);
 
 	const [ingredientInView, setIngredientInView] = useState('bun');
-	const changeIngredientTypeInView = (id) => {
-		setIngredientInView(id);
-		document.querySelector(`#${id}`)?.scrollIntoView({ behavior: 'smooth' });
-	};
+
+	const [refBun, inViewBun] = useInView();
+	const [refSauce, inViewSauce] = useInView();
+	const [refMain, inViewMain] = useInView();
+
+	useEffect(() => {
+		if (inViewBun) {
+			setIngredientInView('bun');
+		} else if (inViewSauce) {
+			setIngredientInView('sauce');
+		} else if (inViewMain) {
+			setIngredientInView('main');
+		}
+	}, [inViewBun, inViewSauce, inViewMain]);
 
 	return (
 		<section className={s.column}>
 			<p className='text text_type_main-large mt-10 mb-5'>Соберите бургер</p>
 			<IngredientsTab
-				onClick={changeIngredientTypeInView}
-				inView={ingredientInView}
+				ingredientInView={ingredientInView}
+				setIngredientInView={setIngredientInView}
 			/>
 			<div className={cn(s.ingredients, 'custom-scroll')}>
-				<BurgerIngredientType name='Булки' id='bun'>
+				<BurgerIngredientType name='Булки' id='bun' ref={refBun}>
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'bun')
 						.map((ingredient) => {
 							return <BurgerIngredient {...ingredient} key={ingredient._id} />;
 						})}
 				</BurgerIngredientType>
-				<BurgerIngredientType name='Соусы' id='sauce'>
+				<BurgerIngredientType name='Соусы' id='sauce' ref={refSauce}>
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'sauce')
 						.map((ingredient) => {
 							return <BurgerIngredient {...ingredient} key={ingredient._id} />;
 						})}
 				</BurgerIngredientType>
-				<BurgerIngredientType name='Начинки' id='main'>
+				<BurgerIngredientType name='Начинки' id='main' ref={refMain}>
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'main')
 						.map((ingredient) => {
