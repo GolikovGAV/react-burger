@@ -8,7 +8,7 @@ function checkResponse(res) {
 		: res.json().then((res) => Promise.reject(`Ошибка: ${res.message}`));
 }
 
-function request(url) {
+export function request(url) {
 	return fetch(url).then(checkResponse);
 }
 

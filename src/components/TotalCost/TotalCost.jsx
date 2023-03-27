@@ -10,12 +10,13 @@ import {
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
 
-function TotalCost() {
+function TotalCost(props) {
 	const [state, setState] = React.useState(false);
 
 	const openModal = () => {
 		state === false ? setState(true) : setState(false);
 	};
+
 	return (
 		<div className={cn(s.price, 'mt-10 mr-4')}>
 			<Button
@@ -33,7 +34,7 @@ function TotalCost() {
 				</Modal>
 			)}
 			<CurrencyIcon type='primary' />
-			<p className='text text_type_digits-medium mr-2'>600</p>
+			<p className='text text_type_digits-medium mr-2'>{props.total}</p>
 		</div>
 	);
 }

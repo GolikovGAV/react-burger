@@ -1,12 +1,14 @@
+import React from 'react';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import { DndProvider } from 'react-dnd';
+import { useDispatch } from 'react-redux';
+
 import s from './App.module.css';
 
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
 
-import { useDispatch } from 'react-redux';
 import { fetchIngredients } from '../services/selectors/burgerIngredientSlice';
-
-import React from 'react';
 
 function App() {
 	const dispatch = useDispatch();
@@ -16,8 +18,10 @@ function App() {
 
 	return (
 		<main className={s.main}>
-			<BurgerIngredients />
-			<BurgerConstructor />
+			<DndProvider backend={HTML5Backend}>
+				<BurgerIngredients />
+				<BurgerConstructor />
+			</DndProvider>
 		</main>
 	);
 }

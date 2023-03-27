@@ -8,22 +8,28 @@ import Modal from '../Modal/Modal';
 import cn from 'classnames';
 
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { useDispatch, useSelector } from 'react-redux';
-import { addConstructorElement } from '../services/selectors/burgerConstructorSlice';
 import uuid4 from 'uuid4';
+import { useDrag } from 'react-dnd/dist/hooks';
+import { useSelector } from 'react-redux';
+import { selectCountState } from '../services/selectors/burgerConstructorSlice';
 
 function BurgerIngredient(ingredient) {
-	// const [count, setCount] = useState(0);
-
 	const [state, setState] = useState(false);
 
 	const openModal = () => {
 		state === false ? setState(true) : setState(false);
 	};
 
-	const dispatch = useDispatch();
-
 	const id = uuid4();
+
+	const [_, dragRef] = useDrag({
+		type: 'BurgerIngredient',
+		item: ingredient
+	});
+
+	const countID = ingredient._id;
+
+	const counter = useSelector((state) => selectCountState(state, countID));
 
 	return (
 		<>
@@ -33,17 +39,16 @@ function BurgerIngredient(ingredient) {
 				</Modal>
 			)}
 			<div
+				ref={dragRef}
 				className={cn(s.ingredient, 'ml-4')}
-				onClick={(e) => {
+				onClick={() => {
 					openModal();
-					dispatch(addConstructorElement(ingredient));
 				}}
 				key={id}
 				id={id}
-				draggable
 			>
+				{counter !== 0 && <Counter count={counter} size='default' />}
 				<img
-					draggable='false'
 					className={s.ingredient__image}
 					src={ingredient.image}
 					alt={ingredient.name}

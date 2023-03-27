@@ -1,18 +1,24 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 
-function IngredientsTab() {
-	const [current, setCurrent] = React.useState('one');
-
+function IngredientsTab(props) {
 	return (
 		<div style={{ display: 'flex' }}>
-			<Tab value='Булки' active={current === 'Булки'} onClick={setCurrent}>
+			<Tab value='bun' active={props.inView === 'bun'} onClick={props.onClick}>
 				Булки
 			</Tab>
-			<Tab value='Соусы' active={current === 'Соусы'} onClick={setCurrent}>
+			<Tab
+				value='sauce'
+				active={props.inView === 'sauce'}
+				onClick={props.onClick}
+			>
 				Соусы
 			</Tab>
-			<Tab value='Начинки' active={current === 'Начинки'} onClick={setCurrent}>
+			<Tab
+				value='main'
+				active={props.inView === 'main'}
+				onClick={props.onClick}
+			>
 				Начинки
 			</Tab>
 		</div>
