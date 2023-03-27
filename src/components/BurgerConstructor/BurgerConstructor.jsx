@@ -1,17 +1,18 @@
 import React from 'react';
-
+import { useDispatch, useSelector } from 'react-redux';
+import uuid4 from 'uuid4';
+import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import cn from 'classnames';
+
 import s from './BurgerConstructor.module.css';
 
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import ChosenElement from '../ChosenElement/ChosenElement';
 import TotalCost from '../TotalCost/TotalCost';
-import { useDispatch, useSelector } from 'react-redux';
-import uuid4 from 'uuid4';
-import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import { addConstructorElement } from '../services/selectors/burgerConstructorSlice';
 import EmptyBasket from '../EmptyBasket/EmptyBasket';
 import NoBun from '../NoBun/NoBun';
+import { sendOrder } from '../services/selectors/burgerOrderInfo';
 
 function BurgerConstructor() {
 	const selectedBun = useSelector((state) => state.burgerConstructor.bun);
@@ -35,6 +36,17 @@ function BurgerConstructor() {
 		});
 		return total;
 	});
+
+	const sendRequest = () => {
+		const orderList = [];
+		const chosenBuns = selectedBun?._id;
+		orderList.push(chosenBuns, chosenBuns);
+		selectedFillings.forEach((ingredient) => {
+			orderList.push(ingredient._id);
+		});
+		dispatch(sendOrder(orderList));
+	};
+
 	return (
 		<>
 			<section ref={dropRef} className='mt-25 mb-10 ml-4'>
@@ -77,11 +89,7 @@ function BurgerConstructor() {
 				) : (
 					<NoBun type='bottom' text='Перетащите булку сюда (низ)' />
 				)}
-				<TotalCost
-					total={total}
-					selectedFillings={selectedFillings}
-					selectedBun={selectedBun}
-				/>
+				<TotalCost total={total} sendRequest={sendRequest} />
 			</section>
 		</>
 	);

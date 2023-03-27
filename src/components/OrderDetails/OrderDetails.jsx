@@ -1,16 +1,20 @@
 import React from 'react';
-import s from './OrderDetails.module.css';
 import cn from 'classnames';
+import { useSelector } from 'react-redux';
+
+import s from './OrderDetails.module.css';
 import done from '../../images/done.svg';
 import close from '../../images/close.svg';
 
 function OrderDetails({ onClick }) {
+	const orderNumber = useSelector((state) => state.burgerOrderInfo.orderList);
+
 	return (
 		<>
 			<p className={cn(s.glow, 'text text_type_digits-large mt-30 mb-8')}>
-				034536
+				{orderNumber?.order.number}
 			</p>
-			<p className='text text_type_main-default'>идентификатор заказа </p>
+			<p className='text text_type_main-default'>идентификатор заказа</p>
 			<img
 				src={done}
 				alt='Заказ принят'

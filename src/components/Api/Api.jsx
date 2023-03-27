@@ -1,8 +1,8 @@
-const config = {
+export const config = {
 	url: 'https://norma.nomoreparties.space/api/ingredients'
 };
 
-function checkResponse(res) {
+export function checkResponse(res) {
 	return res.ok
 		? res.json()
 		: res.json().then((res) => Promise.reject(`Ошибка: ${res.message}`));
