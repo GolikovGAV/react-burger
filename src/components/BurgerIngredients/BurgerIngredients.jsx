@@ -39,21 +39,36 @@ function BurgerIngredients() {
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'bun')
 						.map((ingredient) => {
-							return <BurgerIngredient {...ingredient} key={ingredient._id} />;
+							return (
+								<BurgerIngredient
+									ingredient={ingredient}
+									key={ingredient._id}
+								/>
+							);
 						})}
 				</BurgerIngredientType>
 				<BurgerIngredientType name='Соусы' id='sauce' ref={refSauce}>
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'sauce')
 						.map((ingredient) => {
-							return <BurgerIngredient {...ingredient} key={ingredient._id} />;
+							return (
+								<BurgerIngredient
+									ingredient={ingredient}
+									key={ingredient._id}
+								/>
+							);
 						})}
 				</BurgerIngredientType>
 				<BurgerIngredientType name='Начинки' id='main' ref={refMain}>
 					{ingredients
 						.filter((ingredient) => ingredient.type === 'main')
 						.map((ingredient) => {
-							return <BurgerIngredient {...ingredient} key={ingredient._id} />;
+							return (
+								<BurgerIngredient
+									ingredient={ingredient}
+									key={ingredient._id}
+								/>
+							);
 						})}
 				</BurgerIngredientType>
 			</div>

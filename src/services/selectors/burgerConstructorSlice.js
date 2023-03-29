@@ -22,7 +22,7 @@ export const burgerConstructorSlice = createSlice({
 		},
 		removeConstructorElement: (state, action) => {
 			state.ingredients = state.ingredients.filter(
-				(ingredient) => ingredient.id != action.payload.id
+				(ingredient) => ingredient.id !== action.payload.id
 			);
 		},
 		sortSelectedFilling: (state, action) => {

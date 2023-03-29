@@ -9,15 +9,7 @@
 	align-items: center;
 	justify-content: space-between;
 }
-.close {
-	width: 24px;
-	height: 24px;
-	cursor: pointer;
-	border: 0;
-	background: none;
-	object-fit: contain;
-	object-position: center;
-}
+
 .nutrition {
 	color: var(--text-inactive-color);
 	display: grid;

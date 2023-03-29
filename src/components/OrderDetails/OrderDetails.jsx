@@ -4,9 +4,8 @@ import { useSelector } from 'react-redux';
 
 import s from './OrderDetails.module.css';
 import done from '../../images/done.svg';
-import close from '../../images/close.svg';
 
-function OrderDetails({ onClick }) {
+function OrderDetails() {
 	const orderNumber = useSelector((state) => state.burgerOrderInfo.orderList);
 
 	return (
@@ -26,9 +25,6 @@ function OrderDetails({ onClick }) {
 			<p className={cn(s.inactive, 'text text_type_main-default mb-30')}>
 				Дождитесь готовности на орбитальной станции
 			</p>
-			<button className={cn(s.close, 'mt-15 mr-10')} onClick={onClick}>
-				<img src={close} alt='Закрыть' />
-			</button>
 		</>
 	);
 }

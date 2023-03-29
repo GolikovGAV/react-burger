@@ -4,11 +4,10 @@ import { DndProvider } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 
 import s from './App.module.css';
-
 import BurgerIngredients from '../BurgerIngredients/BurgerIngredients';
 import BurgerConstructor from '../BurgerConstructor/BurgerConstructor';
-
-import { fetchIngredients } from '../services/selectors/burgerIngredientSlice';
+import { fetchIngredients } from '../../services/selectors/burgerIngredientSlice';
+import AppHeader from '../AppHeader/AppHeader';
 
 function App() {
 	const dispatch = useDispatch();
@@ -17,12 +16,16 @@ function App() {
 	}, []);
 
 	return (
-		<main className={s.main}>
-			<DndProvider backend={HTML5Backend}>
-				<BurgerIngredients />
-				<BurgerConstructor />
-			</DndProvider>
-		</main>
+		<>
+			<AppHeader />
+
+			<main className={s.main}>
+				<DndProvider backend={HTML5Backend}>
+					<BurgerIngredients />
+					<BurgerConstructor />
+				</DndProvider>
+			</main>
+		</>
 	);
 }
 

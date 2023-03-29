@@ -1,18 +1,17 @@
 import React, { useRef } from 'react';
-
-import cn from 'classnames';
 import s from './ChosenElement.module.css';
+import { useDispatch } from 'react-redux';
+import { useDrag, useDrop } from 'react-dnd';
+import PropTypes from 'prop-types';
 
 import {
 	ConstructorElement,
 	DragIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch } from 'react-redux';
 import {
 	sortSelectedFilling,
 	removeConstructorElement
-} from '../services/selectors/burgerConstructorSlice';
-import { useDrag, useDrop } from 'react-dnd';
+} from '../../services/selectors/burgerConstructorSlice';
 
 function ChosenElement({ ingredient, index }) {
 	const dispatch = useDispatch();
@@ -79,5 +78,10 @@ function ChosenElement({ ingredient, index }) {
 		</div>
 	);
 }
+
+ChosenElement.propTypes = {
+	ingredient: PropTypes.object.isRequired,
+	index: PropTypes.number.isRequired
+};
 
 export default ChosenElement;

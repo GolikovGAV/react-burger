@@ -1,18 +1,16 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import uuid4 from 'uuid4';
 import { useDrop } from 'react-dnd/dist/hooks/useDrop';
 import cn from 'classnames';
 
 import s from './BurgerConstructor.module.css';
-
 import { ConstructorElement } from '@ya.praktikum/react-developer-burger-ui-components';
 import ChosenElement from '../ChosenElement/ChosenElement';
 import TotalCost from '../TotalCost/TotalCost';
-import { addConstructorElement } from '../services/selectors/burgerConstructorSlice';
+import { addConstructorElement } from '../../services/selectors/burgerConstructorSlice';
 import EmptyBasket from '../EmptyBasket/EmptyBasket';
 import NoBun from '../NoBun/NoBun';
-import { sendOrder } from '../services/selectors/burgerOrderInfo';
+import { sendOrder } from '../../services/selectors/burgerOrderInfo';
 
 function BurgerConstructor() {
 	const selectedBun = useSelector((state) => state.burgerConstructor.bun);
@@ -69,7 +67,7 @@ function BurgerConstructor() {
 								<ChosenElement
 									ingredient={ingredient}
 									index={index}
-									key={uuid4()}
+									key={ingredient.id}
 								/>
 							);
 						})

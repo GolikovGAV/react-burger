@@ -1,8 +1,8 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import cn from 'classnames';
-import s from './TotalCost.module.css';
 
+import s from './TotalCost.module.css';
 import {
 	Button,
 	CurrencyIcon
@@ -33,7 +33,7 @@ function TotalCost({ total, sendRequest }) {
 			</Button>
 			{state === true && (
 				<Modal onClick={openModal}>
-					<OrderDetails onClick={openModal} />
+					<OrderDetails />
 				</Modal>
 			)}
 			<CurrencyIcon type='primary' />
@@ -41,5 +41,10 @@ function TotalCost({ total, sendRequest }) {
 		</div>
 	);
 }
+
+TotalCost.propTypes = {
+	total: PropTypes.number.isRequired,
+	sendRequest: PropTypes.func.isRequired
+};
 
 export default TotalCost;

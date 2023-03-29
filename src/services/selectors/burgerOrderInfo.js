@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-import { checkResponse } from '../../Api/Api';
+import { BASE_URL, checkResponse, request } from '../../Api/Api';
 
 const initialState = {
 	orderList: null
@@ -9,13 +9,13 @@ const initialState = {
 export const sendOrder = createAsyncThunk(
 	'burgerOrderInfo/post',
 	async (orderList, ThunkApi) => {
-		const res = await fetch('https://norma.nomoreparties.space/api/orders', {
+		const res = await request(`${BASE_URL}orders`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json; charset=utf-8'
 			},
 			body: JSON.stringify({ ingredients: orderList })
-		}).then(checkResponse);
+		});
 
 		ThunkApi.dispatch(setOrderDetails(res));
 	}

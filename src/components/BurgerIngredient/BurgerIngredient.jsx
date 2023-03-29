@@ -3,6 +3,7 @@ import cn from 'classnames';
 import uuid4 from 'uuid4';
 import { useDrag } from 'react-dnd/dist/hooks';
 import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import s from './BurgerIngredient.module.css';
 import {
@@ -10,17 +11,15 @@ import {
 	CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import Modal from '../Modal/Modal';
-
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
-import { selectCountState } from '../services/selectors/burgerConstructorSlice';
-function BurgerIngredient(ingredient) {
+import { selectCountState } from '../../services/selectors/burgerConstructorSlice';
+
+function BurgerIngredient({ ingredient }) {
 	const [state, setState] = useState(false);
 
 	const openModal = () => {
 		state === false ? setState(true) : setState(false);
 	};
-
-	const id = uuid4();
 
 	const [_, dragRef] = useDrag({
 		type: 'BurgerIngredient',
@@ -35,7 +34,7 @@ function BurgerIngredient(ingredient) {
 		<>
 			{state === true && (
 				<Modal onClick={openModal}>
-					<IngredientDetails data={ingredient} onClick={openModal} />
+					<IngredientDetails ingredient={ingredient} />
 				</Modal>
 			)}
 			<div
@@ -44,8 +43,7 @@ function BurgerIngredient(ingredient) {
 				onClick={() => {
 					openModal();
 				}}
-				key={id}
-				id={id}
+				id={uuid4()}
 			>
 				{counter !== 0 && <Counter count={counter} size='default' />}
 				<img
@@ -62,5 +60,9 @@ function BurgerIngredient(ingredient) {
 		</>
 	);
 }
+
+BurgerIngredient.propTypes = {
+	ingredient: PropTypes.object.isRequired
+};
 
 export default BurgerIngredient;

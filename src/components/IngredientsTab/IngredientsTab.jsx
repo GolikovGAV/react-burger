@@ -1,5 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
+import s from './IngredientsTab.module.css';
 
 function IngredientsTab({ ingredientInView, setIngredientInView }) {
 	const changeIngredientTypeInView = (id) => {
@@ -8,7 +11,7 @@ function IngredientsTab({ ingredientInView, setIngredientInView }) {
 	};
 
 	return (
-		<div style={{ display: 'flex' }}>
+		<nav className={s.nav}>
 			<Tab
 				value='bun'
 				active={ingredientInView === 'bun'}
@@ -30,8 +33,13 @@ function IngredientsTab({ ingredientInView, setIngredientInView }) {
 			>
 				Начинки
 			</Tab>
-		</div>
+		</nav>
 	);
 }
+
+IngredientsTab.propTypes = {
+	ingredientInView: PropTypes.string.isRequired,
+	setIngredientInView: PropTypes.func.isRequired
+};
 
 export default IngredientsTab;
