@@ -1,0 +1,7 @@
+.ingredients {
+	max-height: 756px;
+	overflow-y: scroll;
+}
+.column {
+	height: 912px;
+}

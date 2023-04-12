@@ -1,0 +1,6 @@
+.filling {
+	display: grid;
+	row-gap: 16px;
+	overflow-y: auto;
+	max-height: 464px;
+}

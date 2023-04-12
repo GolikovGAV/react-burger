@@ -1,0 +1,13 @@
+.close {
+	position: absolute;
+	top: 60px;
+	right: 40px;
+	width: 24px;
+	height: 24px;
+	cursor: pointer;
+	border: 0;
+	padding: 0;
+	background: none;
+	object-fit: cover;
+	object-position: center;
+}
