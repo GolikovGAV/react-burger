@@ -1,9 +1,11 @@
-export const BASE_URL = 'https://norma.nomoreparties.space/api/';
+export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
 export function checkResponse(res) {
 	return res.ok
 		? res.json()
-		: res.json().then((res) => Promise.reject(`Ошибка: ${res.message}`));
+		: res
+				.json()
+				.then((res) => Promise.reject({ ...res, statusCode: res.status }));
 }
 
 export function request(url, options) {
@@ -11,7 +13,7 @@ export function request(url, options) {
 }
 
 function getInfoFromServer() {
-	return request(`${BASE_URL}ingredients`).then((data) => {
+	return request(`${BASE_URL}/ingredients`).then((data) => {
 		return data.data;
 	});
 }

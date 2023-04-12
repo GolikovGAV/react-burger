@@ -17,9 +17,6 @@
 	padding: 0;
 	text-decoration: none;
 }
-.inactive {
-	color: var(--text-inactive-color);
-}
 .left {
 	margin-right: 132px;
 }
