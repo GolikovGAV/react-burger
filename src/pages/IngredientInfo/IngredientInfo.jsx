@@ -3,18 +3,17 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
-import s from './IngredientDetails.module.css';
+import s from './IngredientInfo.module.css';
 
-function IngredientDetails() {
+function IngredientInfo() {
 	const params = useParams();
 	const ingredients = useSelector((state) => state.burgerIngredient.data);
 	const chosenOne = ingredients.find((ingredient) => {
 		return ingredient._id === params.id;
 	});
-
 	return (
-		<>
-			<div className={cn(s.title, 'mt-10 ml-10 mr-10')}>
+		<section className={cn(s.container)}>
+			<div className={cn(s.title)}>
 				<p className='text text_type_main-large'>Детали ингредиента</p>
 			</div>
 			<img className={s.image} src={chosenOne?.image} alt={chosenOne?.name} />
@@ -31,8 +30,8 @@ function IngredientDetails() {
 					{chosenOne?.carbohydrates}
 				</p>
 			</div>
-		</>
+		</section>
 	);
 }
 
-export default IngredientDetails;
+export default IngredientInfo;

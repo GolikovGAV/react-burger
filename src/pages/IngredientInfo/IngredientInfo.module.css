@@ -1,0 +1,27 @@
+.image {
+	width: 480px;
+	height: 240px;
+}
+.title {
+	width: 640px;
+	height: 64px;
+	text-align: center;
+}
+
+.nutrition {
+	color: var(--text-inactive-color);
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	column-gap: 20px;
+	row-gap: 8px;
+	text-align: center;
+}
+.container {
+	margin: 120px auto 0;
+	width: 640px;
+	height: 575px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

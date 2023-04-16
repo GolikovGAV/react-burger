@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
-import uuid4 from 'uuid4';
 import { useDrag } from 'react-dnd/dist/hooks';
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -10,16 +9,11 @@ import {
 	Counter,
 	CurrencyIcon
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import Modal from '../Modal/Modal';
-import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import { selectCountState } from '../../services/selectors/burgerConstructorSlice';
+import { Link, useLocation } from 'react-router-dom';
 
 function BurgerIngredient({ ingredient }) {
-	const [state, setState] = useState(false);
-
-	const openModal = () => {
-		state === false ? setState(true) : setState(false);
-	};
+	const location = useLocation();
 
 	const [_, dragRef] = useDrag({
 		type: 'BurgerIngredient',
@@ -32,18 +26,12 @@ function BurgerIngredient({ ingredient }) {
 
 	return (
 		<>
-			{state === true && (
-				<Modal onClick={openModal}>
-					<IngredientDetails ingredient={ingredient} />
-				</Modal>
-			)}
-			<div
+			<Link
+				to={{ pathname: `ingredients/${ingredient._id}` }}
+				state={{ background: location }}
 				ref={dragRef}
 				className={cn(s.ingredient, 'ml-4')}
-				onClick={() => {
-					openModal();
-				}}
-				id={uuid4()}
+				replace={true}
 			>
 				{counter !== 0 && <Counter count={counter} size='default' />}
 				<img
@@ -56,7 +44,7 @@ function BurgerIngredient({ ingredient }) {
 					<CurrencyIcon type='primary' />
 				</div>
 				<p className='text text_type_main-default'>{ingredient.name}</p>
-			</div>
+			</Link>
 		</>
 	);
 }

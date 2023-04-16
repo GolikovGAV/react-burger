@@ -1,0 +1,29 @@
+.page {
+	max-width: 1240px;
+	display: flex;
+	gap: 60px;
+	margin: 180px auto 0;
+}
+.nav {
+	display: grid;
+	grid-template-rows: repeat(3, 64px);
+	grid-template-columns: 320px;
+	align-items: center;
+}
+.container {
+	max-width: 480px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.link {
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.2s linear;
+}
+
+.link:hover {
+	opacity: 0.7;
+}
