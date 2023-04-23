@@ -11,7 +11,7 @@ import {
 	removeConstructorElement
 } from '../../services/selectors/burgerConstructorSlice';
 import { TIngredient } from '../../utils/types';
-import { CustomUseDispatch } from '../../utils/hooks';
+import { useCustomDispatch } from '../../utils/hooks';
 
 function ChosenElement({
 	ingredient,
@@ -20,7 +20,7 @@ function ChosenElement({
 	ingredient: TIngredient;
 	index: number;
 }) {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
 	const id = ingredient.id;
 

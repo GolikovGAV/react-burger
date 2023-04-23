@@ -6,11 +6,11 @@ import s from './BurgerIngredients.module.css';
 import IngredientsTab from '../IngredientsTab/IngredientsTab';
 import BurgerIngredientType from '../BurgerIngredientType/BurgerIngredientType';
 import BurgerIngredient from '../BurgerIngredient/BurgerIngredient';
-import { CustomUseSelector } from '../../utils/hooks';
+import { useCustomSelector } from '../../utils/hooks';
 import { TIngredient } from '../../utils/types';
 
 function BurgerIngredients() {
-	const ingredients: TIngredient[] = CustomUseSelector(
+	const ingredients: TIngredient[] = useCustomSelector(
 		(state) => state.burgerIngredient.data
 	);
 

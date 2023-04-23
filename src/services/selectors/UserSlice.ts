@@ -67,9 +67,9 @@ const initialState: TInitialState = {
 	resetPasswordNewRequest: false
 };
 
-export const checkUserAuth = createAsyncThunk(
+export const checkUserAuth = createAsyncThunk<any, any, ThunkAPI>(
 	`${sliceName}/checkUserAuth`,
-	async (_, { extra: api, rejectWithValue, dispatch }: any) => {
+	async (_, { extra: api, rejectWithValue, dispatch }) => {
 		try {
 			const data = await api.getUser();
 			if (!data?.success) {

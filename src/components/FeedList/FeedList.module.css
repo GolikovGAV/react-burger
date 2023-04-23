@@ -1,0 +1,14 @@
+.container {
+	max-width: 600px;
+	width: 100%;
+}
+.list {
+	display: flex;
+	flex-direction: column;
+	list-style: none;
+	gap: 16px;
+	margin: 0;
+	padding: 0;
+	max-height: 800px;
+	overflow-y: auto;
+}

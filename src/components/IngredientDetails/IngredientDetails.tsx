@@ -2,13 +2,13 @@ import cn from 'classnames';
 import { useParams } from 'react-router-dom';
 
 import s from './IngredientDetails.module.css';
-import { CustomUseSelector } from '../../utils/hooks';
+import { useCustomSelector } from '../../utils/hooks';
 import { TIngredient } from '../../utils/types';
 
 function IngredientDetails() {
 	const params = useParams();
-	const ingredients = CustomUseSelector((state) => state.burgerIngredient.data);
-	const chosenOne: any = ingredients.find(
+	const ingredients = useCustomSelector((state) => state.burgerIngredient.data);
+	const chosenOne = ingredients.find(
 		(ingredient: TIngredient) => ingredient._id === params.id
 	);
 

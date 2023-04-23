@@ -1,12 +1,11 @@
-import React from 'react';
 import cn from 'classnames';
 
 import s from './OrderDetails.module.css';
 import done from '../../images/done.svg';
-import { CustomUseSelector } from '../../utils/hooks';
+import { useCustomSelector } from '../../utils/hooks';
 
 function OrderDetails() {
-	const orderNumber = CustomUseSelector(
+	const orderNumber = useCustomSelector(
 		(state) => state.burgerOrderInfo.serverResponse?.order?.number
 	);
 

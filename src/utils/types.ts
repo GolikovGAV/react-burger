@@ -28,3 +28,29 @@ export type TUserReq = {
 	accessToken?: string;
 	refreshToken?: string;
 };
+
+export type TOrder = {
+	_id: string;
+	ingredients: string[];
+	status: string;
+	name: string;
+	createdAt: Date;
+	updatedAt: Date;
+	number: number;
+};
+
+export type TOrderList = {
+	success: boolean;
+	orders: TOrder[];
+	total: number;
+	totalToday: number;
+};
+
+export type wsPayloadConnect = {
+	wsUrl: string;
+	withTokenRefresh: boolean;
+};
+
+export type TOrderState = {
+	data: TOrderList | null;
+};

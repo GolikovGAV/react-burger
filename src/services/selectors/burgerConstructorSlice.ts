@@ -2,6 +2,7 @@ import uuid4 from 'uuid4';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { TIngredient } from '../../utils/types';
+import { TRootState } from '../store';
 
 type TState = {
 	bun: null | TIngredient;
@@ -13,8 +14,8 @@ const initialState: TState = {
 	ingredients: []
 };
 
-const buns = (state: any) => state.burgerConstructor.bun;
-const items = (state: any) => state.burgerConstructor.ingredients;
+const buns = (state: TRootState) => state.burgerConstructor.bun;
+const items = (state: TRootState) => state.burgerConstructor.ingredients;
 
 export const burgerConstructorSlice = createSlice({
 	name: 'burgerConstructor',

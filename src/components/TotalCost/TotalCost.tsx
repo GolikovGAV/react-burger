@@ -8,7 +8,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
-import { CustomUseSelector } from '../../utils/hooks';
+import { useCustomSelector } from '../../utils/hooks';
 
 function TotalCost({
 	total,
@@ -23,7 +23,7 @@ function TotalCost({
 		state === false ? setState(true) : setState(false);
 	};
 
-	const isThereABun = CustomUseSelector((state) => state.burgerConstructor.bun);
+	const isThereABun = useCustomSelector((state) => state.burgerConstructor.bun);
 
 	return (
 		<div className={cn(s.price, 'mt-10 mr-4')}>
