@@ -1,4 +1,3 @@
-import uuid4 from 'uuid4';
 import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { TIngredient } from '../../utils/types';
@@ -9,7 +8,7 @@ type TState = {
 	ingredients: TIngredient[];
 };
 
-const initialState: TState = {
+export const initialState: TState = {
 	bun: null,
 	ingredients: []
 };
@@ -25,7 +24,7 @@ export const burgerConstructorSlice = createSlice({
 			if (action.payload.type === 'bun') {
 				state.bun = action.payload;
 			} else {
-				state.ingredients.push({ ...action.payload, id: uuid4() });
+				state.ingredients.push({ ...action.payload });
 			}
 		},
 		removeConstructorElement: (state, action) => {
@@ -65,7 +64,7 @@ export const burgerConstructorSlice = createSlice({
 });
 
 export const selectCountState = createSelector(
-	[items, buns, (items, id) => id],
+	[items, buns, (state, id) => id],
 	(items, buns, id) => {
 		return [buns, ...items, buns].filter(
 			(ingredient) => ingredient && ingredient._id === id

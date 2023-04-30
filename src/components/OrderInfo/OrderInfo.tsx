@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import cn from 'classnames';
 
 import s from './OrderInfo.module.css';
@@ -12,9 +12,18 @@ const OrderInfo = () => {
 
 	const ingredients = useCustomSelector((state) => state.burgerIngredient.data);
 
-	const orders = useCustomSelector(
+	const profileOrders = useCustomSelector(
+		(state) => state.rootReducer.orderPage.data?.orders
+	);
+	const feedOrders = useCustomSelector(
 		(state) => state.rootReducer.feedPage.data?.orders
 	);
+
+	const location = useLocation();
+
+	const orders = location.pathname.includes('/profile/orders')
+		? profileOrders
+		: feedOrders;
 
 	const order = orders?.find((order) => order._id === id);
 

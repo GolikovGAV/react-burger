@@ -13,9 +13,10 @@ const FeedList = () => {
 		<section className={s.container}>
 			<p className='text text_type_main-large mb-5'>Лента заказов</p>
 			<ul className={cn(s.list, 'custom-scroll')}>
-				{orders?.map((order: TOrder) => {
-					return <FeedElement order={order} key={order?._id} />;
-				})}
+				{orders &&
+					orders?.map((order: TOrder) => {
+						return <FeedElement order={order} key={order?._id} />;
+					})}
 			</ul>
 		</section>
 	);

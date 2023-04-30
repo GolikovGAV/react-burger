@@ -9,6 +9,7 @@ import {
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
 import { useCustomSelector } from '../../utils/hooks';
+import { TUserInfo } from '../../utils/types';
 
 function TotalCost({
 	total,
@@ -24,6 +25,10 @@ function TotalCost({
 	};
 
 	const isThereABun = useCustomSelector((state) => state.burgerConstructor.bun);
+
+	const isUserAuthorized: boolean = useCustomSelector(
+		(state) => state.rootReducer.user.isAuthChecked
+	);
 
 	return (
 		<div className={cn(s.price, 'mt-10 mr-4')}>
