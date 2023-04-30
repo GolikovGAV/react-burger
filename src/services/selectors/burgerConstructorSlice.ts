@@ -2,6 +2,7 @@ import { createSelector, createSlice } from '@reduxjs/toolkit';
 
 import { TIngredient } from '../../utils/types';
 import { TRootState } from '../store';
+import uuid4 from 'uuid4';
 
 type TState = {
 	bun: null | TIngredient;
@@ -24,7 +25,10 @@ export const burgerConstructorSlice = createSlice({
 			if (action.payload.type === 'bun') {
 				state.bun = action.payload;
 			} else {
-				state.ingredients.push({ ...action.payload });
+				state.ingredients.push({
+					...action.payload,
+					id: `${Math.floor(performance.now() / 10)}`
+				});
 			}
 		},
 		removeConstructorElement: (state, action) => {

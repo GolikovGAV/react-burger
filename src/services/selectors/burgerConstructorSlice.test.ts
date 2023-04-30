@@ -22,7 +22,12 @@ describe('user reducer', () => {
 				type: addConstructorElement.type,
 				payload: testIngredient
 			})
-		).toEqual({ ...initialState, ingredients: [testIngredient] });
+		).toEqual({
+			...initialState,
+			ingredients: [
+				{ ...testIngredient, id: `${Math.floor(performance.now() / 10)}` }
+			]
+		});
 	});
 
 	it('should hanlde removeConstructorElement', () => {
