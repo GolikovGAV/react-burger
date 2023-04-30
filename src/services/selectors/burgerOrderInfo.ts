@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 
 import { BASE_URL, request } from '../../Api/Api';
+import { getCookie } from '../../Api/cookies';
 
 type TState = {
 	serverResponse: null | {
@@ -24,7 +25,8 @@ export const sendOrder = createAsyncThunk(
 		const res = await request(`${BASE_URL}/orders`, {
 			method: 'POST',
 			headers: {
-				'Content-Type': 'application/json; charset=utf-8'
+				'Content-Type': 'application/json; charset=utf-8',
+				authorization: getCookie('accessToken')
 			},
 			body: JSON.stringify({ ingredients: selectOrderDetails })
 		});

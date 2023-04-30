@@ -9,12 +9,12 @@ import {
 	Input,
 	PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { registerUser } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch } from '../../utils/hooks';
+import { registerUser } from '../../services/selectors/userSlice';
+import { useCustomDispatch } from '../../utils/hooks';
 import { TUserInfo } from '../../utils/types';
 
 function Registration() {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
 	const [value, setValue] = useState({
 		email: '',

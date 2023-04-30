@@ -8,12 +8,12 @@ import {
 	Input,
 	PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { resetPasswordNew } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch } from '../../utils/hooks';
+import { resetPasswordNew } from '../../services/selectors/userSlice';
+import { useCustomDispatch } from '../../utils/hooks';
 import { TUserInfo } from '../../utils/types';
 
 function ResetPassword() {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
 	const [value, setValue] = useState({
 		password: '',
@@ -36,7 +36,7 @@ function ResetPassword() {
 			}}
 			className={s.page}
 		>
-			<p className='text text_type_main-medium'>Восстановление пароля</p>
+			<p className='text text_type_main-medium mt-30'>Восстановление пароля</p>
 			<PasswordInput
 				onChange={(e) => setValue({ ...value, password: e.target.value })}
 				value={value.password}

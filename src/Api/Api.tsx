@@ -1,5 +1,8 @@
 export const BASE_URL = 'https://norma.nomoreparties.space/api';
 
+export const WS_URL_ORDERS = 'wss://norma.nomoreparties.space/orders';
+export const WS_URL_FEED = 'wss://norma.nomoreparties.space/orders/all';
+
 export type TRequest = {
 	method?: string;
 	headers: {

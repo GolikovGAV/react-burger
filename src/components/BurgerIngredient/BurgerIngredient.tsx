@@ -10,7 +10,7 @@ import {
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { selectCountState } from '../../services/selectors/burgerConstructorSlice';
 import { TIngredient } from '../../utils/types';
-import { CustomUseSelector } from '../../utils/hooks';
+import { useCustomSelector } from '../../utils/hooks';
 
 function BurgerIngredient(data: { ingredient: TIngredient }) {
 	const location = useLocation();
@@ -22,7 +22,7 @@ function BurgerIngredient(data: { ingredient: TIngredient }) {
 
 	const countID = data.ingredient._id;
 
-	const counter = CustomUseSelector((state) =>
+	const counter = useCustomSelector((state) =>
 		selectCountState(state, countID)
 	);
 

@@ -12,7 +12,7 @@ import { Link, useMatch } from 'react-router-dom';
 function AppHeader() {
 	const isConstrucor = useMatch('/');
 	const isProfile = useMatch('/profile');
-	const isOrderFeed = useMatch('/order-list');
+	const isOrderFeed = useMatch('/feed');
 
 	return (
 		<header className={s.AppHeader}>
@@ -32,7 +32,7 @@ function AppHeader() {
 			</nav>
 
 			<nav className={cn(s.left, 'mt-4 mb-4 ml-5')}>
-				<Link to='/order-list' className={cn(s.link)}>
+				<Link to='/feed' className={cn(s.link)}>
 					<ListIcon type={isOrderFeed ? 'primary' : 'secondary'} />
 
 					<p

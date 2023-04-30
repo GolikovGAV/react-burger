@@ -1,6 +1,7 @@
-import React, { FC, ReactElement } from 'react';
+import { FC, ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { CustomUseSelector } from '../../utils/hooks';
+
+import { useCustomSelector } from '../../utils/hooks';
 
 export type TProtectedRoute = {
 	onlyUnAuth?: any;
@@ -12,7 +13,7 @@ export const ProtectedRoute: FC<TProtectedRoute> = ({
 	children
 }) => {
 	const location = useLocation();
-	const user = CustomUseSelector((state) => state.rootReducer?.user.data);
+	const user = useCustomSelector((state) => state.rootReducer?.user.data);
 
 	if (onlyUnAuth && user) {
 		const { from } = location.state || { from: { pathname: '/' } };

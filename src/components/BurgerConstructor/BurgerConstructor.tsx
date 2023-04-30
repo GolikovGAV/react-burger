@@ -11,14 +11,20 @@ import { addConstructorElement } from '../../services/selectors/burgerConstructo
 import EmptyBasket from '../EmptyBasket/EmptyBasket';
 import NoBun from '../NoBun/NoBun';
 import { sendOrder } from '../../services/selectors/burgerOrderInfo';
-import { CustomUseDispatch, CustomUseSelector } from '../../utils/hooks';
+import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
+import { getTotalSumOfOrder } from '../../utils/utils';
+import { TIngredient } from '../../utils/types';
+import { totalmem } from 'os';
 
 function BurgerConstructor() {
-	const selectedBun = CustomUseSelector((state) => state.burgerConstructor.bun);
-	const selectedFillings = CustomUseSelector(
+	const selectedBun: TIngredient | null = useCustomSelector(
+		(state) => state.burgerConstructor.bun
+	);
+	const selectedFillings: TIngredient[] | null = useCustomSelector(
 		(state) => state.burgerConstructor.ingredients
 	);
-	const dispatch = CustomUseDispatch();
+
+	const dispatch = useCustomDispatch();
 
 	const [, dropRef] = useDrop({
 		accept: 'BurgerIngredient',
@@ -27,24 +33,25 @@ function BurgerConstructor() {
 		}
 	});
 
-	const total = React.useMemo(() => {
-		let total = 0;
-		selectedBun ? (total += selectedBun.price * 2) : (total = 0);
-		selectedFillings.map((ingredient) => {
-			total += ingredient.price;
-		});
-		return total;
-	}, undefined);
+	const ingredientsForTotal: any = [];
+	ingredientsForTotal.push(selectedBun, selectedBun);
+	selectedFillings.forEach((ingredient: TIngredient) => {
+		ingredientsForTotal.push(ingredient);
+	});
 
 	const sendRequest = () => {
-		const orderList = [];
-		const chosenBuns = selectedBun?._id;
-		orderList.push(chosenBuns, chosenBuns);
-		selectedFillings.forEach((ingredient) => {
+		const orderList: any = [];
+		ingredientsForTotal.forEach((ingredient: TIngredient) => {
 			orderList.push(ingredient._id);
 		});
 		dispatch(sendOrder(orderList));
 	};
+
+	let total = 0;
+
+	if (getTotalSumOfOrder(ingredientsForTotal)) {
+		total = getTotalSumOfOrder(ingredientsForTotal);
+	}
 
 	return (
 		<>

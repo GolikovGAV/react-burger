@@ -7,12 +7,12 @@ import {
 	PasswordInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Link, useNavigate } from 'react-router-dom';
-import { loginUser } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch, CustomUseSelector } from '../../utils/hooks';
+import { loginUser } from '../../services/selectors/userSlice';
+import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
 import { TUserInfo } from '../../utils/types';
 
 function Login() {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
 	const navigate = useNavigate();
 	const [value, setValue] = useState({
@@ -20,7 +20,7 @@ function Login() {
 		password: ''
 	});
 
-	const isLoginned = CustomUseSelector(
+	const isLoginned = useCustomSelector(
 		(state) => state?.rootReducer?.user?.data
 	);
 
@@ -45,7 +45,7 @@ function Login() {
 			}}
 			className={s.page}
 		>
-			<p className='text text_type_main-medium'>Вход</p>
+			<p className='text text_type_main-medium mt-30'>Вход</p>
 			<EmailInput
 				onChange={(e) => setValue({ ...value, email: e.target.value })}
 				value={value.email}

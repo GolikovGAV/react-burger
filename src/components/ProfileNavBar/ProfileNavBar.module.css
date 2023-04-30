@@ -1,0 +1,18 @@
+.nav {
+	display: grid;
+	grid-template-rows: repeat(3, 64px);
+	grid-template-columns: 320px;
+	align-items: center;
+	margin-top: 120px;
+}
+.link {
+	cursor: pointer;
+	text-decoration: none;
+	transition: all 0.2s linear;
+}
+.link:hover {
+	opacity: 0.7;
+}
+.link_color_active {
+	color: var(--text-primary-color);
+}

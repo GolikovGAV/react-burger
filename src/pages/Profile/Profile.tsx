@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import cn from 'classnames';
 
 import s from './Profile.module.css';
@@ -6,19 +6,18 @@ import {
 	Input,
 	Button
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { getCookie } from '../../Api/cookies';
-import { logoutUser, updateInfoUser } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch, CustomUseSelector } from '../../utils/hooks';
-import { TUserInfo, TUserReq } from '../../utils/types';
-import { Link } from 'react-router-dom';
+import { updateInfoUser } from '../../services/selectors/userSlice';
+import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
+import { TUserInfo } from '../../utils/types';
+import ProfileNavBar from '../../components/ProfileNavBar/ProfileNavBar';
 
 const Profile = () => {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
-	const storeEmail = CustomUseSelector(
+	const storeEmail = useCustomSelector(
 		(state) => state.rootReducer?.user.data?.email
 	);
-	const storeName = CustomUseSelector(
+	const storeName = useCustomSelector(
 		(state) => state.rootReducer?.user.data?.name
 	);
 
@@ -27,15 +26,6 @@ const Profile = () => {
 		email: storeEmail,
 		password: ''
 	});
-
-	const token = getCookie('refreshToken');
-	const RequestBody = {
-		token: token
-	};
-
-	const logOut = (RequestBody: any) => {
-		dispatch(logoutUser(RequestBody));
-	};
 
 	const updateUserInfoRequest = (value: TUserInfo) => {
 		dispatch(updateInfoUser(value));
@@ -49,32 +39,7 @@ const Profile = () => {
 			}}
 			className={s.page}
 		>
-			<nav className={s.nav}>
-				<p className={cn(s.link, 'text text_type_main-medium')}>Профиль</p>
-				<Link
-					to='/order-list'
-					className={cn(
-						s.link,
-						'text text_type_main-medium text_color_inactive'
-					)}
-				>
-					История заказов
-				</Link>
-				<p
-					onClick={() => {
-						logOut(RequestBody);
-					}}
-					className={cn(
-						s.link,
-						'text text_type_main-medium text_color_inactive'
-					)}
-				>
-					Выход
-				</p>
-				<p className='text text_type_main-default text_color_inactive mt-20'>
-					В этом разделе вы можете изменить свои персональные данные
-				</p>
-			</nav>
+			<ProfileNavBar />
 			<section className={s.container}>
 				<Input
 					type={'text'}
@@ -105,7 +70,7 @@ const Profile = () => {
 					icon='EditIcon'
 					extraClass='mt-6'
 				/>
-				<div className={`${s.choice} mt-6`}>
+				<div className={cn(s.choice, 'mt-6')}>
 					<Button
 						type='secondary'
 						size='medium'

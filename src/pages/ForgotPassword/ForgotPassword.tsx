@@ -6,20 +6,27 @@ import {
 	Button,
 	EmailInput
 } from '@ya.praktikum/react-developer-burger-ui-components';
-import { resetPasswordEmail } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch } from '../../utils/hooks';
+import { resetPasswordEmail } from '../../services/selectors/userSlice';
+import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
 
 function ForgotPassword() {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 	const navigate = useNavigate();
 
 	const [value, setValue] = useState({
 		email: ''
 	});
 
+	const isRequestSuccess = useCustomSelector(
+		(state) => state?.rootReducer?.user?.resetPasswordEmailError
+	);
+
 	const onSubmit = (data: object) => {
 		dispatch(resetPasswordEmail(data));
-		navigate('/reset-password');
+
+		if (!isRequestSuccess) {
+			navigate('/reset-password', { state: { fromForgotPassword: true } });
+		}
 	};
 
 	return (
@@ -30,7 +37,7 @@ function ForgotPassword() {
 			}}
 			className={s.page}
 		>
-			<p className='text text_type_main-medium'>Восстановление пароля</p>
+			<p className='text text_type_main-medium mt-30'>Восстановление пароля</p>
 			<EmailInput
 				onChange={(e) => setValue({ ...value, email: e.target.value })}
 				value={value.email}

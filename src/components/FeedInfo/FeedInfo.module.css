@@ -1,0 +1,32 @@
+.date_ready_list {
+	display: flex;
+	flex-direction: column;
+}
+.container {
+	display: flex;
+	flex-direction: column;
+}
+.columns {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 36px;
+}
+.orders {
+	display: flex;
+	flex-direction: column;
+	width: 280px;
+}
+.orders__list {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+.orders__done {
+	color: var(--colors-interface-success);
+}
+.glow {
+	text-shadow: 0px 0px 16px var(--colors-interface-accent);
+}

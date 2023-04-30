@@ -13,15 +13,27 @@ import { fetchIngredients } from '../../services/selectors/burgerIngredientSlice
 import IngredientDetails from '../IngredientDetails/IngredientDetails';
 import Modal from '../Modal/Modal';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
-import { checkUserAuth } from '../../services/selectors/UserSlice';
-import { CustomUseDispatch } from '../../utils/hooks';
+import { checkUserAuth } from '../../services/selectors/userSlice';
+import { useCustomDispatch } from '../../utils/hooks';
+import FeedPage from '../../pages/FeedPage/FeedPage';
+import OrderInfo from '../OrderInfo/OrderInfo';
+import { WS_URL_FEED, WS_URL_ORDERS } from '../../Api/Api';
+import {
+	wsConnectFeed,
+	wsDisconnectFeed
+} from '../../services/actions/feedPage';
+import {
+	wsConnectOrder,
+	wsDisconnectOrder
+} from '../../services/actions/orderPage';
+import PreviousOrders from '../../pages/PreviousOrders/PreviousOrders';
 
 function App() {
-	const dispatch = CustomUseDispatch();
+	const dispatch = useCustomDispatch();
 
 	useEffect(() => {
 		dispatch(fetchIngredients());
-		dispatch(checkUserAuth());
+		dispatch(checkUserAuth(''));
 	}, []);
 
 	const navigate = useNavigate();
@@ -31,6 +43,19 @@ function App() {
 	function handleCloseModal() {
 		navigate(background.pathname || '/', { replace: true });
 	}
+
+	useEffect(() => {
+		dispatch(wsConnectOrder({ wsUrl: WS_URL_ORDERS, withTokenRefresh: true }));
+		dispatch(wsConnectFeed({ wsUrl: WS_URL_FEED, withTokenRefresh: false }));
+		return () => {
+			dispatch(wsDisconnectOrder());
+			dispatch(wsDisconnectFeed());
+		};
+	}, []);
+
+	const isFromForgotPassword = location.state?.fromForgotPassword;
+
+	console.log('loca', location);
 
 	return (
 		<>
@@ -61,14 +86,16 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
-				<Route
-					path='/reset-password'
-					element={
-						<ProtectedRoute onlyUnAuth>
-							<ResetPassword />
-						</ProtectedRoute>
-					}
-				/>
+				{isFromForgotPassword && (
+					<Route
+						path='/reset-password'
+						element={
+							<ProtectedRoute onlyUnAuth>
+								<ResetPassword />
+							</ProtectedRoute>
+						}
+					/>
+				)}
 				<Route
 					path='/profile'
 					element={
@@ -77,7 +104,18 @@ function App() {
 						</ProtectedRoute>
 					}
 				/>
+				<Route path='/feed' element={<FeedPage />} />
 				<Route path='/ingredients/:id' element={<IngredientInfo />} />
+				<Route path='feed/:id' element={<OrderInfo />} />
+				<Route
+					path='/profile/orders'
+					element={
+						<ProtectedRoute>
+							<PreviousOrders />
+						</ProtectedRoute>
+					}
+				/>
+				<Route path='/profile/orders/:id' element={<OrderInfo />} />
 			</Routes>
 			{background && (
 				<Routes>
@@ -86,6 +124,22 @@ function App() {
 						element={
 							<Modal onClick={handleCloseModal}>
 								<IngredientDetails />
+							</Modal>
+						}
+					/>
+					<Route
+						path='feed/:id'
+						element={
+							<Modal onClick={handleCloseModal}>
+								<OrderInfo />
+							</Modal>
+						}
+					/>
+					<Route
+						path='profile/orders/:id'
+						element={
+							<Modal onClick={handleCloseModal}>
+								<OrderInfo />
 							</Modal>
 						}
 					/>
