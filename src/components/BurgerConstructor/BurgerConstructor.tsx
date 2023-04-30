@@ -60,7 +60,7 @@ function BurgerConstructor() {
 					<ConstructorElement
 						type='top'
 						isLocked={true}
-						text={`${selectedBun.name} (вверх)`}
+						text={`${selectedBun.name} (верх)`}
 						price={selectedBun.price}
 						thumbnail={selectedBun.image}
 						extraClass='ml-8 mb-4'

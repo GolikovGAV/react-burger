@@ -14,8 +14,6 @@ function OrderDetails() {
 		(state) => state.burgerOrderInfo.isLoading
 	);
 
-	console.log(isOrderLoading);
-
 	return (
 		<>
 			{isOrderLoading && (

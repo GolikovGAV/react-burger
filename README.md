@@ -2,4 +2,6 @@
 
 ## Project: React Burger
 
-# Описание прокекта 
+# Описание прокекта
+
+# Ссылка на gh-pages: https://golikovgav.github.io/react-burger
