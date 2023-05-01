@@ -2,8 +2,8 @@ import cn from 'classnames';
 
 import s from './OrderDetails.module.css';
 import done from '../../images/done.svg';
-import loader from '../../images/oval.svg';
 import { useCustomSelector } from '../../utils/hooks';
+import Loader from '../Loader/Loader';
 
 function OrderDetails() {
 	const orderNumber = useCustomSelector(
@@ -16,13 +16,7 @@ function OrderDetails() {
 
 	return (
 		<>
-			{isOrderLoading && (
-				<img
-					src={loader}
-					alt='Загрузка'
-					className={cn(s.image, 'mt-15 mb-15')}
-				/>
-			)}
+			{isOrderLoading && <Loader />}
 			{!isOrderLoading && (
 				<>
 					<p className={cn(s.glow, 'text text_type_digits-large mt-30 mb-8')}>

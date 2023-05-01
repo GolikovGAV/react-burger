@@ -1,7 +1,13 @@
 describe('template spec', () => {
+	const testUrl = 'http://localhost:3000/react-burger/';
+	const testUser = {
+		mail: 'GolikovGAV@yandex.ru',
+		password: '123123'
+	};
+
 	beforeEach(() => {
 		cy.viewport(1920, 1080);
-		cy.visit('http://localhost:3000');
+		cy.visit(testUrl);
 		cy.on('uncaught:exception', (err, runnable) => {
 			return false;
 		});
@@ -31,7 +37,7 @@ describe('template spec', () => {
 			.trigger('drop');
 	});
 
-	it('passes opening order modal', () => {
+	it('passes opening order modal, authorization and DnD', () => {
 		cy.contains('Краторная булка').trigger('dragstart');
 		cy.contains('Перетащите булку сюда')
 			.trigger('dragenter')
@@ -45,6 +51,18 @@ describe('template spec', () => {
 			.trigger('drop');
 
 		cy.contains('Оформить заказ').click();
+
+		cy.contains('Вход');
+		cy.get('input').first().type(testUser.mail);
+		cy.get('input').last().type(testUser.password);
+
+		cy.get('button').contains('Войти').click();
+
+		cy.wait(150);
+
+		cy.contains('Оформить заказ').click();
+
+		cy.wait(15000);
 
 		cy.contains('идентификатор заказа');
 	});

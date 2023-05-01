@@ -1,0 +1,10 @@
+.loader {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	object-fit: contain;
+}
+.image {
+	width: 120px;
+	height: 120px;
+}

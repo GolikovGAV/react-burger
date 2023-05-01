@@ -3,11 +3,40 @@ import cn from 'classnames';
 
 import s from './OrderInfo.module.css';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useCustomSelector } from '../../utils/hooks';
+import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
 import { orderDate } from '../../utils/date';
 import { getTotalSumOfOrder, ingredientsIcons } from '../../utils/utils';
+import { useEffect } from 'react';
+import {
+	wsConnectOrder,
+	wsDisconnectOrder
+} from '../../services/actions/orderPage';
+import { WS_URL_FEED, WS_URL_ORDERS } from '../../Api/Api';
+import {
+	wsConnectFeed,
+	wsDisconnectFeed
+} from '../../services/actions/feedPage';
 
 const OrderInfo = () => {
+	const dispatch = useCustomDispatch();
+
+	const isWSOpen = useCustomSelector(
+		(state) => state.rootReducer.feedPage.data?.success
+	);
+
+	useEffect(() => {
+		if (!isWSOpen) {
+			dispatch(
+				wsConnectOrder({ wsUrl: WS_URL_ORDERS, withTokenRefresh: true })
+			);
+			dispatch(wsConnectFeed({ wsUrl: WS_URL_FEED, withTokenRefresh: false }));
+			return () => {
+				dispatch(wsDisconnectOrder());
+				dispatch(wsDisconnectFeed());
+			};
+		}
+	}, []);
+
 	const { id } = useParams();
 
 	const ingredients = useCustomSelector((state) => state.burgerIngredient.data);
