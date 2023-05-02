@@ -2,16 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import {
 	wsCloseOrder,
-	wsConnectingOrder,
 	wsErrorOrder,
 	wsMessageOrder,
 	wsOpenOrder
 } from '../actions/orderPage';
-import { TOrderState } from '../../utils/types';
-
-const initialState: TOrderState = {
-	data: null
-};
+import { initialState } from '../../utils/utils';
 
 export const ordersReducer = createReducer(initialState, (builder) => {
 	builder
@@ -22,7 +17,7 @@ export const ordersReducer = createReducer(initialState, (builder) => {
 			console.log('CLOSE WEBSOCKET');
 		})
 		.addCase(wsErrorOrder, (state, action) => {
-			console.log('error');
+			console.log('wsErrorOrder');
 		})
 		.addCase(wsMessageOrder, (state, action) => {
 			state.data = action.payload;

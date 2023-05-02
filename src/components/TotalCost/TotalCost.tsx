@@ -9,6 +9,9 @@ import {
 import OrderDetails from '../OrderDetails/OrderDetails';
 import Modal from '../Modal/Modal';
 import { useCustomSelector } from '../../utils/hooks';
+import { TUserInfo } from '../../utils/types';
+import { useNavigate } from 'react-router-dom';
+import { getCookie } from '../../Api/cookies';
 
 function TotalCost({
 	total,
@@ -25,6 +28,10 @@ function TotalCost({
 
 	const isThereABun = useCustomSelector((state) => state.burgerConstructor.bun);
 
+	const isUserAuthorized: string | undefined = getCookie('accessToken');
+
+	const navigate = useNavigate();
+
 	return (
 		<div className={cn(s.price, 'mt-10 mr-4')}>
 			{!isThereABun ? (
@@ -34,10 +41,6 @@ function TotalCost({
 					type='primary'
 					size='large'
 					extraClass='ml-10'
-					onClick={() => {
-						openModal();
-						sendRequest();
-					}}
 				>
 					Оформить заказ
 				</Button>
@@ -48,6 +51,10 @@ function TotalCost({
 					size='large'
 					extraClass='ml-10'
 					onClick={() => {
+						if (!isUserAuthorized) {
+							navigate('/login');
+						}
+
 						openModal();
 						sendRequest();
 					}}

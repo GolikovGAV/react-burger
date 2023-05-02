@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import cn from 'classnames';
 
 import s from './Profile.module.css';
@@ -10,6 +10,7 @@ import { updateInfoUser } from '../../services/selectors/userSlice';
 import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
 import { TUserInfo } from '../../utils/types';
 import ProfileNavBar from '../../components/ProfileNavBar/ProfileNavBar';
+import Loader from '../../components/Loader/Loader';
 
 const Profile = () => {
 	const dispatch = useCustomDispatch();
@@ -27,11 +28,21 @@ const Profile = () => {
 		password: ''
 	});
 
+	useEffect(() => {
+		setValue({
+			name: storeName,
+			email: storeEmail,
+			password: ''
+		});
+	}, [storeEmail, storeName]);
+
 	const updateUserInfoRequest = (value: TUserInfo) => {
 		dispatch(updateInfoUser(value));
 	};
 
-	return (
+	return value.name == undefined ? (
+		<Loader />
+	) : (
 		<form
 			onSubmit={(e) => {
 				e.preventDefault();

@@ -2,6 +2,7 @@ import { FC, ReactElement } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 import { useCustomSelector } from '../../utils/hooks';
+import { getCookie } from '../../Api/cookies';
 
 export type TProtectedRoute = {
 	onlyUnAuth?: any;
@@ -13,6 +14,9 @@ export const ProtectedRoute: FC<TProtectedRoute> = ({
 	children
 }) => {
 	const location = useLocation();
+
+	const isThereUserCookie = getCookie('accessToken');
+
 	const user = useCustomSelector((state) => state.rootReducer?.user.data);
 
 	if (onlyUnAuth && user) {
@@ -23,7 +27,7 @@ export const ProtectedRoute: FC<TProtectedRoute> = ({
 		return <Navigate replace to={from} state={{ background }} />;
 	}
 
-	if (!onlyUnAuth && !user) {
+	if (!onlyUnAuth && !isThereUserCookie) {
 		return (
 			<Navigate
 				replace

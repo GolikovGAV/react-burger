@@ -8,7 +8,7 @@ type TState = {
 	error: any;
 };
 
-const initialState: TState = {
+export const initialState: TState = {
 	data: [],
 	isLoading: false,
 	error: null
@@ -25,19 +25,19 @@ export const fetchIngredients = createAsyncThunk(
 	}
 );
 
-export const burgerIngredientSlice = createSlice({
+const burgerIngredientSlice = createSlice({
 	name: 'burgerIngredientSlice',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
 		builder
-			.addCase(fetchIngredients.pending, (state) => {
-				state.isLoading = true;
-				state.error = null;
-			})
 			.addCase(fetchIngredients.fulfilled, (state, action) => {
 				state.isLoading = false;
 				state.data = action.payload;
+			})
+			.addCase(fetchIngredients.pending, (state) => {
+				state.isLoading = true;
+				state.error = null;
 			})
 			.addCase(fetchIngredients.rejected, (state, action) => {
 				state.isLoading = false;

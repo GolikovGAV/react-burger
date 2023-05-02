@@ -17,15 +17,7 @@ import { checkUserAuth } from '../../services/selectors/userSlice';
 import { useCustomDispatch } from '../../utils/hooks';
 import FeedPage from '../../pages/FeedPage/FeedPage';
 import OrderInfo from '../OrderInfo/OrderInfo';
-import { WS_URL_FEED, WS_URL_ORDERS } from '../../Api/Api';
-import {
-	wsConnectFeed,
-	wsDisconnectFeed
-} from '../../services/actions/feedPage';
-import {
-	wsConnectOrder,
-	wsDisconnectOrder
-} from '../../services/actions/orderPage';
+
 import PreviousOrders from '../../pages/PreviousOrders/PreviousOrders';
 
 function App() {
@@ -33,7 +25,7 @@ function App() {
 
 	useEffect(() => {
 		dispatch(fetchIngredients());
-		dispatch(checkUserAuth(''));
+		dispatch(checkUserAuth());
 	}, []);
 
 	const navigate = useNavigate();
@@ -44,18 +36,7 @@ function App() {
 		navigate(background.pathname || '/', { replace: true });
 	}
 
-	useEffect(() => {
-		dispatch(wsConnectOrder({ wsUrl: WS_URL_ORDERS, withTokenRefresh: true }));
-		dispatch(wsConnectFeed({ wsUrl: WS_URL_FEED, withTokenRefresh: false }));
-		return () => {
-			dispatch(wsDisconnectOrder());
-			dispatch(wsDisconnectFeed());
-		};
-	}, []);
-
 	const isFromForgotPassword = location.state?.fromForgotPassword;
-
-	console.log('loca', location);
 
 	return (
 		<>

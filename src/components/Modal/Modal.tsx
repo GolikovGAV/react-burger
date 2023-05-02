@@ -37,7 +37,11 @@ function Modal({
 
 	return createPortal(
 		<ModalOverlay>
-			<button className={cn(s.close)} onClick={onClick}>
+			<button
+				aria-label='Закрыть окно'
+				className={cn(s.close)}
+				onClick={onClick}
+			>
 				<CloseIcon type='primary' />
 			</button>
 			{children}

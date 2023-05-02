@@ -9,8 +9,6 @@ import { deleteCookie, setCookie } from '../../Api/cookies';
 import { ThunkAPI } from '../store';
 import { TUserReq } from '../../utils/types';
 
-// asdasd
-
 export const sliceName = 'user';
 
 type TInitialState = {
@@ -43,7 +41,7 @@ type TInitialState = {
 	resetPasswordNewRequest: boolean | null;
 };
 
-const initialState: TInitialState = {
+export const initialState: TInitialState = {
 	isAuthChecked: false,
 	data: null,
 
@@ -69,7 +67,7 @@ const initialState: TInitialState = {
 	resetPasswordNewRequest: false
 };
 
-export const checkUserAuth = createAsyncThunk<any, any, ThunkAPI>(
+export const checkUserAuth = createAsyncThunk<any, void, ThunkAPI>(
 	`${sliceName}/checkUserAuth`,
 	async (_, { extra: api, rejectWithValue, dispatch }) => {
 		try {

@@ -13,8 +13,8 @@ import NoBun from '../NoBun/NoBun';
 import { sendOrder } from '../../services/selectors/burgerOrderInfo';
 import { useCustomDispatch, useCustomSelector } from '../../utils/hooks';
 import { getTotalSumOfOrder } from '../../utils/utils';
-import { TIngredient } from '../../utils/types';
-import { totalmem } from 'os';
+import { TIngredient, TUserInfo } from '../../utils/types';
+import uuid4 from 'uuid4';
 
 function BurgerConstructor() {
 	const selectedBun: TIngredient | null = useCustomSelector(
@@ -60,7 +60,7 @@ function BurgerConstructor() {
 					<ConstructorElement
 						type='top'
 						isLocked={true}
-						text={`${selectedBun.name} (вверх)`}
+						text={`${selectedBun.name} (верх)`}
 						price={selectedBun.price}
 						thumbnail={selectedBun.image}
 						extraClass='ml-8 mb-4'
@@ -75,7 +75,7 @@ function BurgerConstructor() {
 								<ChosenElement
 									ingredient={ingredient}
 									index={index}
-									key={ingredient.id}
+									key={uuid4()}
 								/>
 							);
 						})

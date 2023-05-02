@@ -2,16 +2,11 @@ import { createReducer } from '@reduxjs/toolkit';
 
 import {
 	wsCloseFeed,
-	wsConnectingFeed,
 	wsErrorFeed,
 	wsMessageFeed,
 	wsOpenFeed
 } from '../actions/feedPage';
-import { TOrderState } from '../../utils/types';
-
-const initialState: TOrderState = {
-	data: null
-};
+import { initialState } from '../../utils/utils';
 
 export const feedReducer = createReducer(initialState, (builder) => {
 	builder
@@ -21,7 +16,9 @@ export const feedReducer = createReducer(initialState, (builder) => {
 		.addCase(wsCloseFeed, (state) => {
 			console.log('CLOSE WEBSOCKET');
 		})
-		.addCase(wsErrorFeed, (state, action) => {})
+		.addCase(wsErrorFeed, (state, action) => {
+			console.log('wsErrorFeed');
+		})
 		.addCase(wsMessageFeed, (state, action) => {
 			state.data = action.payload;
 		});

@@ -80,7 +80,6 @@ export const socketMiddleware = (wsActions: TWSActions): Middleware => {
 						burgerApi
 							.refreshToken()
 							.then((refreshData) => {
-								console.log('refreshData', refreshData);
 								setCookie('refreshToken', refreshData.refreshToken);
 								setCookie('accessToken', refreshData.accessToken);
 								const newWsUrl = new URL(wsUrl);

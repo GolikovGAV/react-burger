@@ -14,7 +14,7 @@ type TState = {
 	isLoading: boolean;
 };
 
-const initialState: TState = {
+export const initialState: TState = {
 	serverResponse: null,
 	isLoading: false
 };
