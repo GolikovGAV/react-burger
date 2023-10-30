@@ -1,7 +1,20 @@
-# Golikov Artem
+# Голиков Артем
 
-## Project: React Burger
+## Проект "Космическая бургерная"
 
-# Описание прокекта
+### Монументальный проект, в котором использовалось всё (ну или почти)
 
-# Ссылка на gh-pages: https://golikovgav.github.io/react-burger
+Используемые технологии:
+
+- React
+- JS, TS
+- JSX, TSX
+- CSS Modules
+- React-DnD
+- React Router
+- Webpack
+- Redux
+- Cypress
+- Jest
+
+Ссылка на GitHub Pages: https://golikovgav.github.io/react-burger
